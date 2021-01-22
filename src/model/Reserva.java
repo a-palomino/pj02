@@ -9,7 +9,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 public class Reserva {
-	
+	private int id;
 	private String desti;
 	private int preu;
 	private String nom;
@@ -21,6 +21,7 @@ public class Reserva {
 	//Constructor
 	public Reserva(ResultSet rs) throws SQLException, ParseException
 	{
+		setId(rs.getInt("id"));
 		setDesti(rs.getString("desti"));
 		setPreu(rs.getInt("preu"));
 		setNom(rs.getString("nom"));
@@ -31,6 +32,7 @@ public class Reserva {
 	}
 
 	public Reserva(HttpServletRequest request)throws SQLException, ParseException{
+		setId(Integer.parseInt(request.getParameter("id")));
 		setDesti(request.getParameter("desti"));
 		setPreu(Integer.parseInt(request.getParameter("preu")));
 		setNom(request.getParameter("nom"));
@@ -40,6 +42,14 @@ public class Reserva {
 		setData(request.getParameter("data"));
 	}
 	//Getters i Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getDesti() {
 		return desti;
 	}
@@ -96,6 +106,8 @@ public class Reserva {
 		Date dataDef =new SimpleDateFormat("yyyy-mm-dd").parse(data);
 		this.data = dataDef;
 	}
+
+	
 	
 	
 	

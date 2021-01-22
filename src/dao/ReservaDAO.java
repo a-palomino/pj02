@@ -26,7 +26,6 @@ public class ReservaDAO {
 			
 			while(rs.next()) {
 				//Creem la reserva
-				System.out.println(rs);
 				Reserva reserva = new Reserva(rs);
 				//L'afegim a la llista
 				llistaReservas.add(reserva);
@@ -44,7 +43,7 @@ public class ReservaDAO {
 	public static void setReserves(Reserva reserva) throws SQLException {
 		Connection connection = null;
 		PreparedStatement prep = null;
-		String consulta = "INSERT INTO reserves VALUES (?,?,?,?,?,?,?)";
+		String consulta = "INSERT INTO reservas VALUES (?,?,?,?,?,?,?)";
 		
 		try {
 			connection = Connexio.getConnexio();
@@ -58,6 +57,7 @@ public class ReservaDAO {
 			prep.setBoolean(6, reserva.isDescompte());
 			prep.setDate(7, (Date) reserva.getData());
 			prep.executeUpdate();
+			System.out.println(reserva.getDesti() + " " + reserva.getPreu() + " ");
 		} finally {
 			connection.close();
 			prep.close();
@@ -67,7 +67,7 @@ public class ReservaDAO {
 	public static void DeleteReserves(int id) throws SQLException {
 		Connection connection= Connexio.getConnexio();
 		PreparedStatement prep = null;
-		String consulta = "DELETE FROM reserves WHERE id = ?";
+		String consulta = "DELETE FROM reservas WHERE id = ?";
 		
 		try {
 			connection = Connexio.getConnexio();

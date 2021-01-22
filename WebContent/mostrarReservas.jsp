@@ -13,15 +13,15 @@
 	<table>
 	 	<c:forEach items="${reservas}" var="reserva">
 		   <tr>
-	    	<td>Desti: ${reserva.desti}</td>
-	    	<td>Preu: ${reserva.preu}</td>
-	    	<td>Nom: ${reserva.nom}</td>
-	    	<td>Telefon: ${reserva.telf}</td>
-	    	<td>Persones: ${reserva.persones}</td>
-	    	<td>Descompte: ${reserva.descompte}</td>
+	    	<td>Desti: ${reserva.desti}</td><br>
+	    	<td>Preu: ${reserva.preu}</td><br>
+	    	<td>Nom: ${reserva.nom}</td><br>
+	    	<td>Telefon: ${reserva.telf}</td><br>
+	    	<td>Persones: ${reserva.persones}</td><br>
+	    	<td>Descompte: ${reserva.descompte}</td><br>
 	    	<td>Data: ${reserva.data}</td>
 	 	 </tr> 		  	
 		</c:forEach>
-	</table>
+	</table><br>
 </body>
 </html>

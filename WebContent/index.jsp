@@ -1,4 +1,7 @@
 <!-- Eric Recio & Antonio Palomino -->
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +40,7 @@
         <div class="col-2">
         </div>
         <!-- col -->
-        <form class="row g-3 needs-validation" novalidate>
+        <form class="row g-3 needs-validation" novalidate action="afegirReservesControlador" method=post>
             <div class="col-md-2">
                 <label for="validationCustom02" class="form-select">Destí</label><br>
                 <select name="continents" class="form-select" aria-label="Default select example">
@@ -134,6 +137,28 @@
             </div>
         </form>
     </div>
+    
+    
+    <!-- Mostrar las reservas -->
+    <table>
+	 	<c:forEach items="${reservas}" var="reserva">
+		   <tr>
+	    	<td>Desti: ${reserva.desti}</td><br>
+	    	<td>Preu: ${reserva.preu}</td><br>
+	    	<td>Nom: ${reserva.nom}</td><br>
+	    	<td>Telefon: ${reserva.telf}</td><br>
+	    	<td>Persones: ${reserva.persones}</td><br>
+	    	<td>Descompte: ${reserva.descompte}</td><br>
+	    	<td>Data: ${reserva.data}</td>
+	    	
+	    	<td><form action="esborrarReservesControlador" method="post">
+                        <input type="hidden" name="id"  value="${reserva.id}"/>
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+	 	 </tr> 		  	
+		</c:forEach>
+	</table><br>
 </body>
 
 </html>

@@ -42,7 +42,7 @@ public class reservesControlador extends HttpServlet {
 			return;
 		}
 		//redirecció a la web
-		request.getRequestDispatcher("/mostrarReservas.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	/**
