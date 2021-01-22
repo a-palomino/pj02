@@ -4,25 +4,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.sql.Date;
 
 import model.Reserva;
 
 public class ReservaDAO {
 	
-	
-	public static void getReserves() throws SQLException {
+	//rs->Objecte->llistaObjecte->jsp
+	public static ArrayList<Reserva> getReserves() throws SQLException, ParseException {
 		Connection connection = null;
 		PreparedStatement prep = null;
 		ResultSet rs = null;
-		
+		//Arraylist per guardar tots els alumnes
+		ArrayList<Reserva> llistaReservas = new ArrayList<Reserva>();
 		try {
 			connection = Connexio.getConnexio();
-			prep = connection.prepareStatement("SELECT * FROM reserves");
+			prep = connection.prepareStatement("SELECT * FROM reservas");
 			rs = prep.executeQuery();
+			
 			while(rs.next()) {
-				
+				//Creem la reserva
+				System.out.println(rs);
+				Reserva reserva = new Reserva(rs);
+				//L'afegim a la llista
+				llistaReservas.add(reserva);
 			}
+			
+			return llistaReservas;
 		}finally {
 			connection.close();
 			prep.close();

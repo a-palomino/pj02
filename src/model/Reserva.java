@@ -2,7 +2,11 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class Reserva {
 	
@@ -15,7 +19,7 @@ public class Reserva {
 	private Date data;
 	
 	//Constructor
-	public Reserva(ResultSet rs) throws SQLException
+	public Reserva(ResultSet rs) throws SQLException, ParseException
 	{
 		setDesti(rs.getString("desti"));
 		setPreu(rs.getInt("preu"));
@@ -23,10 +27,18 @@ public class Reserva {
 		setTelf(rs.getString("telf"));
 		setPersones(rs.getInt("persones"));
 		setDescompte(rs.getBoolean("descompte"));
-		setData(rs.getDate("data"));
+		setData(rs.getString("data"));
 	}
 
-	
+	public Reserva(HttpServletRequest request)throws SQLException, ParseException{
+		setDesti(request.getParameter("desti"));
+		setPreu(Integer.parseInt(request.getParameter("preu")));
+		setNom(request.getParameter("nom"));
+		setTelf(request.getParameter("telf"));
+		setPersones(Integer.parseInt(request.getParameter("persones")));
+		setDescompte(Boolean.parseBoolean(request.getParameter("descompte")));
+		setData(request.getParameter("data"));
+	}
 	//Getters i Setters
 	public String getDesti() {
 		return desti;
@@ -80,8 +92,9 @@ public class Reserva {
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData(String data) throws ParseException {
+		Date dataDef =new SimpleDateFormat("yyyy-mm-dd").parse(data);
+		this.data = dataDef;
 	}
 	
 	

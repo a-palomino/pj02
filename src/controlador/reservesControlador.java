@@ -1,11 +1,16 @@
 package controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.ReservaDAO;
+import model.Reserva;
 
 /**
  * Servlet implementation class reservesControlador
@@ -26,7 +31,18 @@ public class reservesControlador extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			//Passa per parametre les reserves de la base de dades
+			request.setAttribute("reservas", ReservaDAO.getReserves());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("/error.jsp").forward(request, response);
+			return;
+		}
+		//redirecció a la web
+		request.getRequestDispatcher("/mostrarReservas.jsp").forward(request, response);
 	}
 
 	/**
